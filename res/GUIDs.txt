@@ -1,0 +1,6 @@
+{72a9ebb3-8571-4f7a-85fd-a9dc276004f2} bank:/Master
+{eab4cb67-f40a-0338-03b4-2322d693026a} bank:/Master.strings
+{3f046c7a-9b61-46ed-830d-b7455ef9c46a} bus:/
+{52d99a05-159f-4178-893d-289e8a9777e0} bus:/Reverb
+{d3501c5f-bdee-4ccf-8e2b-f3dc860bf23c} event:/Monkey
+{fc8c6c74-55d9-4440-b323-17710f259189} event:/Music
