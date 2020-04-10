@@ -78,7 +78,8 @@ void SceneBuilder::Initialize()
 	SceneManager::SetCurrentScene("main");
 
 	// We'll load in a monkey head to render something interesting
-	MeshData data = ObjLoader::LoadObj("monkey.obj", glm::vec4(1.0f));
+	MeshData data = ObjLoader::LoadObj("monkey.obj", glm::vec4(1.0f));//Remake this to have proper orientation
+	MeshData data_Gorilla = ObjLoader::LoadObj("Gorilla-LP.obj", glm::vec4(1.0f));
 
 	Shader::Sptr shader = std::make_shared<Shader>();
 	shader->LoadPart(ShaderStageType::VertexShader, "shaders/lighting.vs.glsl");
@@ -89,9 +90,6 @@ void SceneBuilder::Initialize()
 	Material::Sptr mat = std::make_shared<Material>(shader); 
 	mat->Set("s_Albedo", Texture2D::LoadFromFile("marble.png", false, true, true));
 
-	Material::Sptr mat2 = mat->Clone(); 
-	mat2->Set("s_Albedo", Texture2D::LoadFromFile("polka.png", false, true, true));
-
 
 	// The central monkey
 	{
@@ -100,12 +98,56 @@ void SceneBuilder::Initialize()
 		renderable.Mesh = MeshBuilder::Bake(data);
 		renderable.Material = mat;
 		Transform& t = scene->Registry().get<Transform>(eMonkey);
-		t.SetPosition(glm::vec3(0, 0, -10));
+		t.SetPosition(glm::vec3(0, 0, -30));
 		
 		// Make our monkeys spin around the center
-		scene->AddBehaviour<AudioMovementBehaviour>(eMonkey);
+		//scene->AddBehaviour<AudioMovementBehaviour>(eMonkey);
+		scene->AddBehaviour<ControlBehaviour>(eMonkey, glm::vec3(1.0f));
 	}
-	
+
+	// The Gorilla
+	{
+		entt::entity Gorilla = scene->CreateEntity();
+		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(Gorilla);
+		renderable.Mesh = MeshBuilder::Bake(data_Gorilla);
+		renderable.Material = mat;
+		Transform& t = scene->Registry().get<Transform>(Gorilla);
+
+		//Initial Position Set
+		t.SetPosition(glm::vec3(2, -0.5, -30));
+
+		// Make our monkeys spin around the center
+		scene->AddBehaviour<ControlFastest>(Gorilla, glm::vec3(1.0f));
+	}
+
+	//if (monsterDisX <= 1.0 && monsterDisY <= 1.0 && monsterDisX >= -1.0 && monsterDisY >= -1.0) {
+	//	zombieAttacking = true;
+	//	audioEngine.LoadEvent("Zombie", "{b96538e8-08b0-430e-980b-e3018219712d}");
+	//	audioEngine.PlayEvent("Zombie");
+	//	zombieWalking = false;
+	//	if (monsterDisX <= 0.75 && monsterDisY <= 0.75 && monsterDisX >= -0.75 && monsterDisY >= -0.75) {
+	//		//play johnny death noise
+	//		audioEngine.LoadEvent("Death", "{4e8777cb-af09-47a0-82e9-eca06a72ff4e}");
+	//		audioEngine.PlayEvent("Death");
+	//		myMainCamera->SetPosition(glm::vec3(0, 0, 8));
+	//		SceneManager::SetCurrentScene("GameOver");
+	//		Level1 = false;
+	//		//Stop Level3 and all other sounds
+	//		audioEngine.StopEvent("Level 3");
+	//		audioEngine.StopEvent("Level 2");
+	//		audioEngine.StopEvent("Level 1");
+	//		//// Load an event
+	//		audioEngine.LoadEvent("ThemeSong", "{08ad10c9-c26b-48ef-87d5-750135697fcc}");
+
+	//		//// Play the event
+	//		audioEngine.PlayEvent("ThemeSong");
+	//		gameover = true;
+	//		i = 0;
+	//		is = 0;
+	//		is1 = 0;
+	//		is2 = 0;
+	//	}
+	//}
 	
 	// Creates our main camera
 	{
@@ -144,14 +186,11 @@ void SceneBuilder::Initialize()
 		cam.Projection = glm::perspective(glm::radians(60.0f), 1.0f, 0.1f, 1000.0f);
 
 		// We'll add our control behaviour so that we can fly the camera around
-		scene->AddBehaviour<ControlBehaviour>(camera, glm::vec3(5.0f));
+		//scene->AddBehaviour<ControlBehaviour>(camera, glm::vec3(5.0f));
 		scene->AddBehaviour<ListenerBehaviour>(camera);
 
 
-	}
-
-
-			
+	}	
 	// Our floor plane
 	{
 		// Building the mesh

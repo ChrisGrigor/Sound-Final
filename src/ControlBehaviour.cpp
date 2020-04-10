@@ -21,43 +21,321 @@ void ControlBehaviour::Update(entt::entity entity) {
 	Window::Sptr window = Application::Get()->GetWindow();
 
 	glm::vec3 translate = glm::vec3(0.0f);
-	glm::vec2 rotation = glm::vec2(0.0f);
-	if (window->IsKeyDown(Key::W))
-		translate.z -= 1.0f;
-	if (window->IsKeyDown(Key::S))
-		translate.z += 1.0f;
-	if (window->IsKeyDown(Key::A))
-		translate.x -= 1.0f;
-	if (window->IsKeyDown(Key::D))
-		translate.x += 1.0f;
-	if (window->IsKeyDown(Key::LeftControl))
-		translate.y -= 1.0f;
-	if (window->IsKeyDown(Key::Space))
-		translate.y += 1.0f;
-
-	if (window->IsKeyDown(Key::Left))
-		rotation.x += 1.0f;
-	if (window->IsKeyDown(Key::Right))
-		rotation.x -= 1.0f;
-	if (window->IsKeyDown(Key::Up))
-		rotation.y += 1.0f;
-	if (window->IsKeyDown(Key::Down))
-		rotation.y -= 1.0f;
+	translate.z += 3.5f;
 
 	translate *= Timing::DeltaTime * mySpeed;
-	rotation *= Timing::DeltaTime * 90.0f;
 
 	if (glm::length(translate) > 0) {
 		translate = glm::mat3(transform.GetLocalTransform()) * translate;
 		translate += transform.GetLocalPosition();
 		transform.SetPosition(translate);
 	}
-	if (glm::length(rotation) > 0) {
-		rotation.x *= glm::abs(myYawPitch.y) > 90 ? -1 : 1;
-		myYawPitch += rotation;
-		myYawPitch = wrap(myYawPitch, glm::vec2(-180.0f), glm::vec2(180.0f));
-		glm::quat rot = glm::angleAxis(glm::radians(myYawPitch.x), glm::vec3(0, 1, 0));
-		rot = rot * glm::angleAxis(glm::radians(myYawPitch.y), glm::vec3(1, 0, 0));
-		transform.SetRotation(rot);
+
+	//Position Updates
+	glm::vec3 positionGorilla = CurrentRegistry().get< florp::game::Transform>(entity).GetLocalPosition();
+	MonkeyPosZ = positionGorilla.z;
+	MonkeyPosX = positionGorilla.x;
+
+	//Attacking the Monkey
+	if (window->IsKeyDown(Key::One) && MonkeyPosX == -2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Two) && MonkeyPosX == 0) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Three) && MonkeyPosX == 2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+
+	//RNG Placement
+	if (MonkeyDist == true) {
+		rng = rand() % 3;
+		auto start = std::chrono::system_clock::now();
+		std::vector<int> v(100000, 42);
+		auto end = std::chrono::system_clock::now();
+		std::chrono::duration<double> diff = end - start;
+		rng = diff.count() * 100000;
+
+		//3 Lanes Positions
+		if (rng % 3 == 0) { //Left
+			transform.SetPosition(glm::vec3(-2, 0, -30));
+		}
+		else if (rng % 3 == 1) { //Middle
+			transform.SetPosition(glm::vec3(0, 0, -30));
+		}
+		else if (rng % 3 == 2) { //Right
+			transform.SetPosition(glm::vec3(2, 0, -30));
+
+		}
+		MonkeyDist = false;
+	}
+}
+
+void ControlFastest::Update(entt::entity entity) {
+	using namespace florp::app;
+	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+	Window::Sptr window = Application::Get()->GetWindow();
+
+	glm::vec3 translate = glm::vec3(0.0f);
+	translate.z += 4.0f;
+
+	translate *= Timing::DeltaTime * mySpeed;
+
+	if (glm::length(translate) > 0) {
+		translate = glm::mat3(transform.GetLocalTransform()) * translate;
+		translate += transform.GetLocalPosition();
+		transform.SetPosition(translate);
+	}
+
+	//Position Updates
+	glm::vec3 positionGorilla = CurrentRegistry().get< florp::game::Transform>(entity).GetLocalPosition();
+	ChrisPosZ = positionGorilla.z;
+	ChrisPosX = positionGorilla.x;
+
+	//Attacking the Gorilla
+	if (window->IsKeyDown(Key::One) && ChrisPosX == -2) {
+		//Testing the distance
+		if (ChrisPosZ >= -5) {
+			ChrisDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Two) && ChrisPosX == 0) {
+		//Testing the distance
+		if (ChrisPosZ >= -5) {
+			ChrisDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Three) && ChrisPosX == 2) {
+		//Testing the distance
+		if (ChrisPosZ >= -5) {
+			ChrisDist = true;
+		}
+	}
+
+	//RNG Placement
+	if (ChrisDist == true) {
+		rng = rand() % 3;
+		auto start = std::chrono::system_clock::now();
+		std::vector<int> v(100000, 42);
+		auto end = std::chrono::system_clock::now();
+		std::chrono::duration<double> diff = end - start;
+		rng = diff.count() * 100000;
+
+		//3 Lanes Positions
+		if (rng % 3 == 0) { //Left
+			transform.SetPosition(glm::vec3(-2, -0.5, -30));
+		}
+		else if (rng % 3 == 1) { //Middle
+			transform.SetPosition(glm::vec3(0, -0.5, -30));
+		}
+		else if (rng % 3 == 2) { //Right
+			transform.SetPosition(glm::vec3(2, -0.5, -30));
+			
+		}
+		ChrisDist = false;
+	}
+}
+
+void ControlFast::Update(entt::entity entity) {
+	using namespace florp::app;
+	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+	Window::Sptr window = Application::Get()->GetWindow();
+
+	glm::vec3 translate = glm::vec3(0.0f);
+	translate.z += 3.0f;
+
+	translate *= Timing::DeltaTime * mySpeed;
+
+	if (glm::length(translate) > 0) {
+		translate = glm::mat3(transform.GetLocalTransform()) * translate;
+		translate += transform.GetLocalPosition();
+		transform.SetPosition(translate);
+	}
+
+	//Position Updates
+	glm::vec3 positionGorilla = CurrentRegistry().get< florp::game::Transform>(entity).GetLocalPosition();
+	MonkeyPosZ = positionGorilla.z;
+	MonkeyPosX = positionGorilla.x;
+
+	//Attacking the Monkey
+	if (window->IsKeyDown(Key::One) && MonkeyPosX == -2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Two) && MonkeyPosX == 0) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Three) && MonkeyPosX == 2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+
+	//RNG Placement
+	if (MonkeyDist == true) {
+		rng = rand() % 3;
+		auto start = std::chrono::system_clock::now();
+		std::vector<int> v(100000, 42);
+		auto end = std::chrono::system_clock::now();
+		std::chrono::duration<double> diff = end - start;
+		rng = diff.count() * 100000;
+
+		//3 Lanes Positions
+		if (rng % 3 == 0) { //Left
+			transform.SetPosition(glm::vec3(-2, 0, -30));
+		}
+		else if (rng % 3 == 1) { //Middle
+			transform.SetPosition(glm::vec3(0, 0, -30));
+		}
+		else if (rng % 3 == 2) { //Right
+			transform.SetPosition(glm::vec3(2, 0, -30));
+
+		}
+		MonkeyDist = false;
+	}
+}
+
+void ControlMedium::Update(entt::entity entity) {
+	using namespace florp::app;
+	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+	Window::Sptr window = Application::Get()->GetWindow();
+
+	glm::vec3 translate = glm::vec3(0.0f);
+	translate.z += 2.5f;
+
+	translate *= Timing::DeltaTime * mySpeed;
+
+	if (glm::length(translate) > 0) {
+		translate = glm::mat3(transform.GetLocalTransform()) * translate;
+		translate += transform.GetLocalPosition();
+		transform.SetPosition(translate);
+	}
+
+	//Position Updates
+	glm::vec3 positionGorilla = CurrentRegistry().get< florp::game::Transform>(entity).GetLocalPosition();
+	MonkeyPosZ = positionGorilla.z;
+	MonkeyPosX = positionGorilla.x;
+
+	//Attacking the Monkey
+	if (window->IsKeyDown(Key::One) && MonkeyPosX == -2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Two) && MonkeyPosX == 0) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Three) && MonkeyPosX == 2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+
+	//RNG Placement
+	if (MonkeyDist == true) {
+		rng = rand() % 3;
+		auto start = std::chrono::system_clock::now();
+		std::vector<int> v(100000, 42);
+		auto end = std::chrono::system_clock::now();
+		std::chrono::duration<double> diff = end - start;
+		rng = diff.count() * 100000;
+
+		//3 Lanes Positions
+		if (rng % 3 == 0) { //Left
+			transform.SetPosition(glm::vec3(-2, 0, -30));
+		}
+		else if (rng % 3 == 1) { //Middle
+			transform.SetPosition(glm::vec3(0, 0, -30));
+		}
+		else if (rng % 3 == 2) { //Right
+			transform.SetPosition(glm::vec3(2, 0, -30));
+
+		}
+		MonkeyDist = false;
+	}
+}
+
+void ControlSlow::Update(entt::entity entity) {
+	using namespace florp::app;
+	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+	Window::Sptr window = Application::Get()->GetWindow();
+
+	glm::vec3 translate = glm::vec3(0.0f);
+	translate.z += 2.0f;
+
+	translate *= Timing::DeltaTime * mySpeed;
+
+	if (glm::length(translate) > 0) {
+		translate = glm::mat3(transform.GetLocalTransform()) * translate;
+		translate += transform.GetLocalPosition();
+		transform.SetPosition(translate);
+	}
+
+	//Position Updates
+	glm::vec3 positionGorilla = CurrentRegistry().get< florp::game::Transform>(entity).GetLocalPosition();
+	MonkeyPosZ = positionGorilla.z;
+	MonkeyPosX = positionGorilla.x;
+
+	//Attacking the Monkey
+	if (window->IsKeyDown(Key::One) && MonkeyPosX == -2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Two) && MonkeyPosX == 0) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Three) && MonkeyPosX == 2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			MonkeyDist = true;
+		}
+	}
+
+	//RNG Placement
+	if (MonkeyDist == true) {
+		rng = rand() % 3;
+		auto start = std::chrono::system_clock::now();
+		std::vector<int> v(100000, 42);
+		auto end = std::chrono::system_clock::now();
+		std::chrono::duration<double> diff = end - start;
+		rng = diff.count() * 100000;
+
+		//3 Lanes Positions
+		if (rng % 3 == 0) { //Left
+			transform.SetPosition(glm::vec3(-2, 0, -30));
+		}
+		else if (rng % 3 == 1) { //Middle
+			transform.SetPosition(glm::vec3(0, 0, -30));
+		}
+		else if (rng % 3 == 2) { //Right
+			transform.SetPosition(glm::vec3(2, 0, -30));
+
+		}
+		MonkeyDist = false;
 	}
 }
