@@ -67,13 +67,13 @@ void ControlBehaviour::Update(entt::entity entity) {
 
 		//3 Lanes Positions
 		if (rng % 3 == 0) { //Left
-			transform.SetPosition(glm::vec3(-2, 0, -30));
+			transform.SetPosition(glm::vec3(-2, -0.5, -30));
 		}
 		else if (rng % 3 == 1) { //Middle
-			transform.SetPosition(glm::vec3(0, 0, -30));
+			transform.SetPosition(glm::vec3(0, -0.5, -30));
 		}
 		else if (rng % 3 == 2) { //Right
-			transform.SetPosition(glm::vec3(2, 0, -30));
+			transform.SetPosition(glm::vec3(2, -0.5, -30));
 
 		}
 		MonkeyDist = false;
@@ -197,13 +197,13 @@ void ControlFast::Update(entt::entity entity) {
 
 		//3 Lanes Positions
 		if (rng % 3 == 0) { //Left
-			transform.SetPosition(glm::vec3(-2, 0, -30));
+			transform.SetPosition(glm::vec3(-2, -0.5, -30));
 		}
 		else if (rng % 3 == 1) { //Middle
-			transform.SetPosition(glm::vec3(0, 0, -30));
+			transform.SetPosition(glm::vec3(0, -0.5, -30));
 		}
 		else if (rng % 3 == 2) { //Right
-			transform.SetPosition(glm::vec3(2, 0, -30));
+			transform.SetPosition(glm::vec3(2, -0.5, -30));
 
 		}
 		MonkeyDist = false;
@@ -262,13 +262,13 @@ void ControlMedium::Update(entt::entity entity) {
 
 		//3 Lanes Positions
 		if (rng % 3 == 0) { //Left
-			transform.SetPosition(glm::vec3(-2, 0, -30));
+			transform.SetPosition(glm::vec3(-2, -0.5, -30));
 		}
 		else if (rng % 3 == 1) { //Middle
-			transform.SetPosition(glm::vec3(0, 0, -30));
+			transform.SetPosition(glm::vec3(0, -0.5, -30));
 		}
 		else if (rng % 3 == 2) { //Right
-			transform.SetPosition(glm::vec3(2, 0, -30));
+			transform.SetPosition(glm::vec3(2, -0.5, -30));
 
 		}
 		MonkeyDist = false;
@@ -327,13 +327,13 @@ void ControlSlow::Update(entt::entity entity) {
 
 		//3 Lanes Positions
 		if (rng % 3 == 0) { //Left
-			transform.SetPosition(glm::vec3(-2, 0, -30));
+			transform.SetPosition(glm::vec3(-2, -0.5, -30));
 		}
 		else if (rng % 3 == 1) { //Middle
-			transform.SetPosition(glm::vec3(0, 0, -30));
+			transform.SetPosition(glm::vec3(0, -0.5, -30));
 		}
 		else if (rng % 3 == 2) { //Right
-			transform.SetPosition(glm::vec3(2, 0, -30));
+			transform.SetPosition(glm::vec3(2, -0.5, -30));
 
 		}
 		MonkeyDist = false;

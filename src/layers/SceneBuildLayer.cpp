@@ -78,8 +78,9 @@ void SceneBuilder::Initialize()
 	SceneManager::SetCurrentScene("main");
 
 	// We'll load in a monkey head to render something interesting
-	MeshData data = ObjLoader::LoadObj("monkey.obj", glm::vec4(1.0f));//Remake this to have proper orientation
-	MeshData data_Gorilla = ObjLoader::LoadObj("Gorilla-LP.obj", glm::vec4(1.0f));
+	MeshData data = ObjLoader::LoadObj("Objects/monkey.obj", glm::vec4(1.0f));//Remake this to have proper orientation
+	MeshData data_Gorilla = ObjLoader::LoadObj("Objects/Gorilla-LP1.obj", glm::vec4(1.0f));
+	MeshData data_Lemonk = ObjLoader::LoadObj("lemonk.obj", glm::vec4(1.0f));
 
 	Shader::Sptr shader = std::make_shared<Shader>();
 	shader->LoadPart(ShaderStageType::VertexShader, "shaders/lighting.vs.glsl");
@@ -91,7 +92,7 @@ void SceneBuilder::Initialize()
 	mat->Set("s_Albedo", Texture2D::LoadFromFile("marble.png", false, true, true));
 
 
-	// The central monkey
+	// The central monkey (default blender)
 	{
 		entt::entity eMonkey = scene->CreateEntity();
 		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(eMonkey);
@@ -105,7 +106,7 @@ void SceneBuilder::Initialize()
 		scene->AddBehaviour<ControlBehaviour>(eMonkey, glm::vec3(1.0f));
 	}
 
-	// The Gorilla
+	//The Gorilla (Chris)
 	{
 		entt::entity Gorilla = scene->CreateEntity();
 		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(Gorilla);
@@ -118,6 +119,21 @@ void SceneBuilder::Initialize()
 
 		// Make our monkeys spin around the center
 		scene->AddBehaviour<ControlFastest>(Gorilla, glm::vec3(1.0f));
+	}
+
+	//Lemonk (Xavier)
+	{
+		entt::entity Lemonk = scene->CreateEntity();
+		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(Lemonk);
+		renderable.Mesh = MeshBuilder::Bake(data_Lemonk);
+		renderable.Material = mat;
+		Transform& t = scene->Registry().get<Transform>(Lemonk);
+
+		//Initial Position Set
+		t.SetPosition(glm::vec3(-2, -0.5, -20));
+
+		// Make our monkeys spin around the center
+		scene->AddBehaviour<ControlSlow>(Lemonk, glm::vec3(1.0f));
 	}
 	
 	// Creates our main camera
