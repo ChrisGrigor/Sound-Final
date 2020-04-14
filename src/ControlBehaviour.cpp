@@ -86,6 +86,16 @@ void ControlBehaviour::Update(entt::entity entity) {
 	}
 }
 
+void ControlBehaviour::RenderGUI(entt::entity entity){
+	ImGui::Begin("Score");
+
+	char txt[16];
+	sprintf(txt, "%d", controlCount);
+	ImGui::Button(txt);
+
+	ImGui::End();
+}
+
 void ControlFastest::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);

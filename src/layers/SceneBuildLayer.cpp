@@ -255,11 +255,7 @@ void SceneBuilder::Initialize()
 		cam.IsMainCamera = true;
 		cam.Projection = glm::perspective(glm::radians(60.0f), 1.0f, 0.1f, 1000.0f);
 
-		// We'll add our control behaviour so that we can fly the camera around
-		//scene->AddBehaviour<ControlBehaviour>(camera, glm::vec3(5.0f));
 		scene->AddBehaviour<ListenerBehaviour>(camera);
-
-
 	}	
 	// Our floor plane
 	{
@@ -274,16 +270,4 @@ void SceneBuilder::Initialize()
 		renderable.Mesh = MeshBuilder::Bake(data);
 		renderable.Material = mat;
 	}
-
-}
-
-void SceneBuilder::RenderGUI() {
-	ImGui::Begin("Score");
-
-	// For now, we'll just have a slider to adjust our exposure
-	char txt[16];
-	sprintf(txt, "%d", controlCount);
-	ImGui::Button(txt);
-
-	ImGui::End();
 }

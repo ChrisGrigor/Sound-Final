@@ -13,9 +13,8 @@ public:
 	virtual ~ControlBehaviour() = default;
 
 	virtual void Update(entt::entity entity) override;
-	
-	
-	
+	//Score/Point System
+	virtual void RenderGUI(entt::entity entity) override;
 
 	float MonkeyPosX;
 	float MonkeyPosZ;
@@ -33,7 +32,6 @@ public:
 	virtual ~ControlFastest() = default;
 
 	virtual void Update(entt::entity entity) override;
-
 
 	float ChrisPosX;
 	float ChrisPosZ;
