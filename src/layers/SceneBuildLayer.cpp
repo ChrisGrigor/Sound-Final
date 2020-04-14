@@ -147,7 +147,7 @@ void SceneBuilder::Initialize()
 		Transform& t = scene->Registry().get<Transform>(LeGorilleHead);
 
 		//Initial Position Set
-		t.SetPosition(glm::vec3(4, -0.5, -20));
+		t.SetPosition(glm::vec3(2, -0.5, -25));
 
 		// Make our monkeys spin around the center
 		scene->AddBehaviour<ControlSlow>(LeGorilleHead, glm::vec3(1.0f));
@@ -209,18 +209,4 @@ void SceneBuilder::Initialize()
 		renderable.Material = mat;
 	}
 
-}
-
-void SceneBuilder::RenderGUI()
-{
-
-	// We'll put all the lighting stuff into it's own ImGUI window
-	ImGui::Begin("Points");
-	glm::vec3 myAmbientLight = glm::vec3(0.0f);
-	myAmbientLight.x = count;
-
-	// We'll have a color picker for the ambient light color
-	ImGui::ColorEdit3("Score", &myAmbientLight.x);
-
-	ImGui::End();
 }
