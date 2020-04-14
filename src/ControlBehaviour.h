@@ -1,7 +1,10 @@
 #pragma once
+#include "florp/app/ApplicationLayer.h"
 #include "florp/game/IBehaviour.h"
+
 #include <GLM/glm.hpp>
 
+static int controlCount;
 //Base Monkey Head
 class ControlBehaviour : public florp::game::IBehaviour {
 public:
@@ -9,6 +12,9 @@ public:
 	virtual ~ControlBehaviour() = default;
 
 	virtual void Update(entt::entity entity) override;
+	
+	
+	
 
 	float MonkeyPosX;
 	float MonkeyPosZ;
@@ -26,6 +32,7 @@ public:
 	virtual ~ControlFastest() = default;
 
 	virtual void Update(entt::entity entity) override;
+
 
 	float ChrisPosX;
 	float ChrisPosZ;

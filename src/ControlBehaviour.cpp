@@ -58,6 +58,7 @@ void ControlBehaviour::Update(entt::entity entity) {
 
 	//RNG Placement
 	if (MonkeyDist == true) {
+		controlCount += 1;
 		rng = rand() % 3;
 		auto start = std::chrono::system_clock::now();
 		std::vector<int> v(100000, 42);
@@ -123,6 +124,7 @@ void ControlFastest::Update(entt::entity entity) {
 
 	//RNG Placement
 	if (ChrisDist == true) {
+		controlCount += 1;
 		rng = rand() % 3;
 		auto start = std::chrono::system_clock::now();
 		std::vector<int> v(100000, 42);
@@ -188,6 +190,7 @@ void ControlFast::Update(entt::entity entity) {
 
 	//RNG Placement
 	if (MonkeyDist == true) {
+		controlCount+=1;
 		rng = rand() % 3;
 		auto start = std::chrono::system_clock::now();
 		std::vector<int> v(100000, 42);
@@ -253,6 +256,7 @@ void ControlMedium::Update(entt::entity entity) {
 
 	//RNG Placement
 	if (MonkeyDist == true) {
+		controlCount += 1;
 		rng = rand() % 3;
 		auto start = std::chrono::system_clock::now();
 		std::vector<int> v(100000, 42);
@@ -318,6 +322,7 @@ void ControlSlow::Update(entt::entity entity) {
 
 	//RNG Placement
 	if (MonkeyDist == true) {
+		controlCount += 1;
 		rng = rand() % 3;
 		auto start = std::chrono::system_clock::now();
 		std::vector<int> v(100000, 42);

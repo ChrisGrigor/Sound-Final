@@ -81,6 +81,7 @@ void SceneBuilder::Initialize()
 	MeshData data = ObjLoader::LoadObj("Objects/monkey.obj", glm::vec4(1.0f));//Remake this to have proper orientation
 	MeshData data_Gorilla = ObjLoader::LoadObj("Objects/Gorilla-LP1.obj", glm::vec4(1.0f));
 	MeshData data_Lemonk = ObjLoader::LoadObj("lemonk.obj", glm::vec4(1.0f));
+	MeshData data_LeGorilleHead=ObjLoader::LoadObj("Objects/LeGorilleHead.obj", glm::vec4(1.0f));
 
 	Shader::Sptr shader = std::make_shared<Shader>();
 	shader->LoadPart(ShaderStageType::VertexShader, "shaders/lighting.vs.glsl");
@@ -134,6 +135,21 @@ void SceneBuilder::Initialize()
 
 		// Make our monkeys spin around the center
 		scene->AddBehaviour<ControlSlow>(Lemonk, glm::vec3(1.0f));
+	}
+
+	//The Gorilla Head(Isaiah)
+	{
+		entt::entity LeGorilleHead = scene->CreateEntity();
+		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(LeGorilleHead);
+		renderable.Mesh = MeshBuilder::Bake(data_LeGorilleHead);
+		renderable.Material = mat;
+		Transform& t = scene->Registry().get<Transform>(LeGorilleHead);
+
+		//Initial Position Set
+		t.SetPosition(glm::vec3(4, -0.5, -20));
+
+		// Make our monkeys spin around the center
+		scene->AddBehaviour<ControlSlow>(LeGorilleHead, glm::vec3(1.0f));
 	}
 	
 	// Creates our main camera
