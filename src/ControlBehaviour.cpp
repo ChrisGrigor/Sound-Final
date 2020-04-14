@@ -57,6 +57,10 @@ void ControlBehaviour::Update(entt::entity entity) {
 		}
 	}
 
+	if (MonkeyPosZ >= -1) {
+		death = true;
+	}
+
 	//RNG Placement
 	if (MonkeyDist == true) {
 		controlCount += 1;
@@ -121,6 +125,10 @@ void ControlFastest::Update(entt::entity entity) {
 		if (ChrisPosZ >= -5) {
 			ChrisDist = true;
 		}
+	}
+
+	if (ChrisPosZ >= -1) {
+		death = true;
 	}
 
 	//RNG Placement
@@ -189,6 +197,10 @@ void ControlFast::Update(entt::entity entity) {
 		}
 	}
 
+	if (MonkeyPosZ >= -1) {
+		death = true;
+	}
+
 	//RNG Placement
 	if (MonkeyDist == true) {
 		controlCount+=1;
@@ -255,6 +267,10 @@ void ControlMedium::Update(entt::entity entity) {
 		}
 	}
 
+	if (MonkeyPosZ >= -1) {
+		death = true;
+	}
+
 	//RNG Placement
 	if (MonkeyDist == true) {
 		controlCount += 1;
@@ -319,6 +335,10 @@ void ControlSlow::Update(entt::entity entity) {
 		if (MonkeyPosZ >= -5) {
 			MonkeyDist = true;
 		}
+	}
+
+	if (MonkeyPosZ >= -1) {
+		death = true;
 	}
 
 	//RNG Placement
@@ -396,7 +416,9 @@ void bomb::Update(entt::entity entity) {
 			translate.z += 5.0f;
 		}
 	}
+	//End of Bomb stuff, might not use
 
+	//Bomb Making it close, so it teleports back
 	if (MonkeyPosZ >= -1) {
 		MonkeyDist = true;
 	}

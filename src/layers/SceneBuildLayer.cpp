@@ -78,14 +78,17 @@ void SceneBuilder::Initialize()
 	auto* scene = SceneManager::RegisterScene("main");
 	SceneManager::SetCurrentScene("main");
 
-	// We'll load in a monkey head to render something interesting
+	//Bunch of primates
 	MeshData data = ObjLoader::LoadObj("Objects/monkey.obj", glm::vec4(1.0f));//Remake this to have proper orientation
 	MeshData data_Gorilla = ObjLoader::LoadObj("Objects/Gorilla-LP1.obj", glm::vec4(1.0f));
 	MeshData data_Lemonk = ObjLoader::LoadObj("lemonk.obj", glm::vec4(1.0f));
 	MeshData data_LeGorilleHead=ObjLoader::LoadObj("Objects/LeGorilleHead2.obj", glm::vec4(1.0f));
 	MeshData data_MarMon = ObjLoader::LoadObj("Objects/MarlinkMonkey1.obj", glm::vec4(1.0f));
 	MeshData data_Monkey = ObjLoader::LoadObj("Objects/monkey_ACNH.obj", glm::vec4(1.0f));
+	//Bomb
 	MeshData data_Bomb = ObjLoader::LoadObj("Objects/bomb.obj", glm::vec4(1.0f));
+	//Floor Markers
+	MeshData data_Floor = ObjLoader::LoadObj("untitled.obj", glm::vec4(1.0f));
 
 	Shader::Sptr shader = std::make_shared<Shader>();
 	shader->LoadPart(ShaderStageType::VertexShader, "shaders/lighting.vs.glsl");
@@ -201,6 +204,21 @@ void SceneBuilder::Initialize()
 		scene->AddBehaviour<bomb>(daBomb, glm::vec3(1.0f));
 	}
 	
+	//Floors 
+	{
+		int zPos = -5;
+		for (int i = 0; i < 2; i++) {
+			entt::entity Floor = scene->CreateEntity();
+			RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(Floor);
+			renderable.Mesh = MeshBuilder::Bake(data_Floor);
+			renderable.Material = mat;
+			Transform& t = scene->Registry().get<Transform>(Floor);
+			//Initial Position Set 
+			t.SetPosition(glm::vec3(0, -1.0, zPos));
+			zPos += 4;
+		}
+	}
+
 	// Creates our main camera
 	{
 		// The color buffer should be marked as shader readable, so that we generate a texture for it

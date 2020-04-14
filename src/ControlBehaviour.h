@@ -5,6 +5,7 @@
 #include <GLM/glm.hpp>
 
 static int controlCount;
+static bool death = false;
 //Base Monkey Head
 class ControlBehaviour : public florp::game::IBehaviour {
 public:
@@ -94,7 +95,6 @@ private:
 	glm::vec2 myYawPitch;
 };
 
-static bool death;
 class bomb : public florp::game::IBehaviour {
 public:
 	bomb(const glm::vec3& speed) : IBehaviour(), mySpeed(speed), myYawPitch(glm::vec2(0.0f)) {};
