@@ -17,6 +17,7 @@
 // Audio Behaviours
 #include "AudioMovementBehaviour.h"
 #include "ListenerBehaviour.h"
+#include <imgui.h>
 
 /*
  * Helper function for creating a shadow casting light
@@ -191,4 +192,19 @@ void SceneBuilder::Initialize()
 		renderable.Mesh = MeshBuilder::Bake(data);
 		renderable.Material = mat;
 	}
+
+}
+
+void SceneBuilder::RenderGUI()
+{
+
+	// We'll put all the lighting stuff into it's own ImGUI window
+	ImGui::Begin("Points");
+	glm::vec3 myAmbientLight = glm::vec3(0.0f);
+	myAmbientLight.x = count;
+
+	// We'll have a color picker for the ambient light color
+	ImGui::ColorEdit3("Score", &myAmbientLight.x);
+
+	ImGui::End();
 }

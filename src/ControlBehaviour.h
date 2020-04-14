@@ -2,6 +2,8 @@
 #include "florp/game/IBehaviour.h"
 #include <GLM/glm.hpp>
 
+static int count;
+
 //Base Monkey Head
 class ControlBehaviour : public florp::game::IBehaviour {
 public:
@@ -75,6 +77,23 @@ class ControlSlow : public florp::game::IBehaviour {
 public:
 	ControlSlow(const glm::vec3& speed) : IBehaviour(), mySpeed(speed), myYawPitch(glm::vec2(0.0f)) {};
 	virtual ~ControlSlow() = default;
+
+	virtual void Update(entt::entity entity) override;
+
+	float MonkeyPosX;
+	float MonkeyPosZ;
+	bool MonkeyDist = false;
+	int rng;
+private:
+	glm::vec3 mySpeed;
+	glm::vec2 myYawPitch;
+};
+
+static bool death;
+class bomb : public florp::game::IBehaviour {
+public:
+	bomb(const glm::vec3& speed) : IBehaviour(), mySpeed(speed), myYawPitch(glm::vec2(0.0f)) {};
+	virtual ~bomb() = default;
 
 	virtual void Update(entt::entity entity) override;
 

@@ -58,6 +58,7 @@ void ControlBehaviour::Update(entt::entity entity) {
 
 	//RNG Placement
 	if (MonkeyDist == true) {
+		count++;
 		rng = rand() % 3;
 		auto start = std::chrono::system_clock::now();
 		std::vector<int> v(100000, 42);
@@ -123,6 +124,7 @@ void ControlFastest::Update(entt::entity entity) {
 
 	//RNG Placement
 	if (ChrisDist == true) {
+		count++;
 		rng = rand() % 3;
 		auto start = std::chrono::system_clock::now();
 		std::vector<int> v(100000, 42);
@@ -314,6 +316,85 @@ void ControlSlow::Update(entt::entity entity) {
 		if (MonkeyPosZ >= -5) {
 			MonkeyDist = true;
 		}
+	}
+
+	//RNG Placement
+	if (MonkeyDist == true) {
+		rng = rand() % 3;
+		auto start = std::chrono::system_clock::now();
+		std::vector<int> v(100000, 42);
+		auto end = std::chrono::system_clock::now();
+		std::chrono::duration<double> diff = end - start;
+		rng = diff.count() * 100000;
+
+		//3 Lanes Positions
+		if (rng % 3 == 0) { //Left
+			transform.SetPosition(glm::vec3(-2, -0.5, -30));
+		}
+		else if (rng % 3 == 1) { //Middle
+			transform.SetPosition(glm::vec3(0, -0.5, -30));
+		}
+		else if (rng % 3 == 2) { //Right
+			transform.SetPosition(glm::vec3(2, -0.5, -30));
+
+		}
+		MonkeyDist = false;
+	}
+}
+
+void bomb::Update(entt::entity entity) {
+	using namespace florp::app;
+	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+	Window::Sptr window = Application::Get()->GetWindow();
+
+	glm::vec3 translate = glm::vec3(0.0f);
+	translate.z += 5.0f;
+
+	translate *= Timing::DeltaTime * mySpeed;
+
+	if (glm::length(translate) > 0) {
+		translate = glm::mat3(transform.GetLocalTransform()) * translate;
+		translate += transform.GetLocalPosition();
+		transform.SetPosition(translate);
+	}
+
+	//Position Updates
+	glm::vec3 positionGorilla = CurrentRegistry().get< florp::game::Transform>(entity).GetLocalPosition();
+	MonkeyPosZ = positionGorilla.z;
+	MonkeyPosX = positionGorilla.x;
+
+	//Attacking the bomb
+	if (window->IsKeyDown(Key::One) && MonkeyPosX == -2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			death = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Two) && MonkeyPosX == 0) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			death = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Three) && MonkeyPosX == 2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			death = true;
+		}
+	}
+	//Bomb stuff
+	if (window->IsKeyDown(Key::Six) && MonkeyPosX == 2) {
+		//Testing the distance
+		if (MonkeyPosZ >= -5) {
+			translate.z += -5.0f;
+		}
+		if (MonkeyPosZ <= -15 && MonkeyPosX == 2) {
+			translate.z += 5.0f;
+		}
+	}
+
+	if (MonkeyPosZ >= -1) {
+		MonkeyDist = true;
 	}
 
 	//RNG Placement
