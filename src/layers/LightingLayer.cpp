@@ -7,6 +7,8 @@
 #include "FrameState.h"
 #include <imgui.h>
 #include "PointLightComponent.h"
+#include "ControlBehaviour.h"
+#include <string>
 
 void LightingLayer::OnWindowResize(uint32_t width, uint32_t height) {
 	myAccumulationBuffer->Resize(width, height);
@@ -204,15 +206,17 @@ void LightingLayer::PostRender() {
 void LightingLayer::RenderGUI()
 {
 	// We'll put all the lighting stuff into it's own ImGUI window
-	ImGui::Begin("Lighting Settings");
+	ImGui::Begin("Score");
 
 	// For now, we'll just have a slider to adjust our exposure
-	static float exposure = 1.0f;
-	if (ImGui::DragFloat("Exposure", &exposure, 0.1f, 0.1f, 10.0f)) {
+	char txt[16];
+	sprintf(txt, "%d", controlCount);
+	ImGui::Button(txt);
+	/*if (ImGui::DragFloat("Exposure", &exposure, 0.1f, 0.1f, 10.0f)) {
 		myFinalComposite->SetUniform("a_Exposure", exposure);
-	}
+	}*/
 	// We'll have a color picker for the ambient light color
-	ImGui::ColorEdit3("Ambient", &myAmbientLight.x);
+	//ImGui::ColorEdit3("Ambient", &myAmbientLight.x);
 	
 	ImGui::End();
 }

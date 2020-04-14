@@ -129,33 +129,33 @@ void PostLayer::OnWindowResize(uint32_t width, uint32_t height) {
 
 void PostLayer::RenderGUI()
 {
-	ImGui::Begin("Post Processing");
+	//ImGui::Begin("Post Processing");
 
-	// Iterate over all passes
-	for (const auto& pass : myPasses) {
-		if (!pass->ConfParameters.empty()) {
-			// Each pass gets it's own header
-			if (ImGui::CollapsingHeader(pass->Name.c_str())) {
-				// Iterate over all parameters for the pass
-				for (const auto& param : pass->ConfParameters) {
-					// Depending on the type, we handle it differently
-					switch (param.Type) {
-					case florp::graphics::ShaderDataType::Float: {
-						float* data = (float*)&param.RawDataBuffer;
-						if (ImGui::SliderFloat(param.Name.c_str(), &data[0], data[1], data[2])) {
-							pass->Shader->SetUniform(param.Name, data[0]);
-						}
-						break;
-					}
-					default:
-						break;
-					}
-				}
-			}
-		}
-	}
+	//// Iterate over all passes
+	//for (const auto& pass : myPasses) {
+	//	if (!pass->ConfParameters.empty()) {
+	//		// Each pass gets it's own header
+	//		if (ImGui::CollapsingHeader(pass->Name.c_str())) {
+	//			// Iterate over all parameters for the pass
+	//			for (const auto& param : pass->ConfParameters) {
+	//				// Depending on the type, we handle it differently
+	//				switch (param.Type) {
+	//				case florp::graphics::ShaderDataType::Float: {
+	//					float* data = (float*)&param.RawDataBuffer;
+	//					if (ImGui::SliderFloat(param.Name.c_str(), &data[0], data[1], data[2])) {
+	//						pass->Shader->SetUniform(param.Name, data[0]);
+	//					}
+	//					break;
+	//				}
+	//				default:
+	//					break;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 
-	ImGui::End();
+	//ImGui::End();
 }
 
 void PostLayer::PostRender() {

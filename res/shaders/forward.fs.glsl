@@ -6,12 +6,15 @@ layout(location = 3) in vec2 inUV;
 
 layout(location = 0) out vec4 outAlbedo;
 layout(location = 1) out vec3 outNormal;
+layout(location = 2) out vec3 outEmissive;
 
 uniform sampler2D s_Albedo;
 
 void main() {
 	// Write the output
 	outAlbedo = vec4(texture(s_Albedo, inUV).rgb * inColor.rgb, inColor.a);
+
+	outEmissive = vec3(0.0);
 
 	// Re-normalize our input, so that it is always length 1
 	vec3 norm = normalize(inNormal);
