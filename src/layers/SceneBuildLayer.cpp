@@ -82,7 +82,10 @@ void SceneBuilder::Initialize()
 	MeshData data = ObjLoader::LoadObj("Objects/monkey.obj", glm::vec4(1.0f));//Remake this to have proper orientation
 	MeshData data_Gorilla = ObjLoader::LoadObj("Objects/Gorilla-LP1.obj", glm::vec4(1.0f));
 	MeshData data_Lemonk = ObjLoader::LoadObj("lemonk.obj", glm::vec4(1.0f));
-	MeshData data_LeGorilleHead=ObjLoader::LoadObj("Objects/LeGorilleHead.obj", glm::vec4(1.0f));
+	MeshData data_LeGorilleHead=ObjLoader::LoadObj("Objects/LeGorilleHead2.obj", glm::vec4(1.0f));
+	MeshData data_MarMon = ObjLoader::LoadObj("Objects/MarlinkMonkey1.obj", glm::vec4(1.0f));
+	MeshData data_Monkey = ObjLoader::LoadObj("Objects/monkey_ACNH.obj", glm::vec4(1.0f));
+	MeshData data_Bomb = ObjLoader::LoadObj("Objects/bomb.obj", glm::vec4(1.0f));
 
 	Shader::Sptr shader = std::make_shared<Shader>();
 	shader->LoadPart(ShaderStageType::VertexShader, "shaders/lighting.vs.glsl");
@@ -101,7 +104,7 @@ void SceneBuilder::Initialize()
 		renderable.Mesh = MeshBuilder::Bake(data);
 		renderable.Material = mat;
 		Transform& t = scene->Registry().get<Transform>(eMonkey);
-		t.SetPosition(glm::vec3(0, 0, -30));
+		t.SetPosition(glm::vec3(0, -0.5, -30));
 		
 		// Make our monkeys spin around the center
 		//scene->AddBehaviour<AudioMovementBehaviour>(eMonkey);
@@ -150,7 +153,52 @@ void SceneBuilder::Initialize()
 		t.SetPosition(glm::vec3(2, -0.5, -25));
 
 		// Make our monkeys spin around the center
-		scene->AddBehaviour<ControlSlow>(LeGorilleHead, glm::vec3(1.0f));
+		scene->AddBehaviour<ControlMedium>(LeGorilleHead, glm::vec3(1.0f));
+	}
+
+	//MarlinkMonkey (Eric) 
+	{
+		entt::entity MarMonkey = scene->CreateEntity();
+		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(MarMonkey);
+		renderable.Mesh = MeshBuilder::Bake(data_MarMon);
+		renderable.Material = mat;
+		Transform& t = scene->Registry().get<Transform>(MarMonkey);
+
+		//Initial Position Set 
+		t.SetPosition(glm::vec3(-2, -0.5, -25));
+
+		// Make our monkeys spin around the center 
+		scene->AddBehaviour<ControlSlow>(MarMonkey, glm::vec3(1.0f));
+	}
+
+	//Monkey (Haocean) 
+	{
+		entt::entity Monkey = scene->CreateEntity();
+		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(Monkey);
+		renderable.Mesh = MeshBuilder::Bake(data_Monkey);
+		renderable.Material = mat;
+		Transform& t = scene->Registry().get<Transform>(Monkey);
+
+		//Initial Position Set 
+		t.SetPosition(glm::vec3(-2, -0.5, -25));
+
+		// Make our monkeys spin around the center 
+		scene->AddBehaviour<ControlFast>(Monkey, glm::vec3(1.0f));
+	}
+
+	//Bomb 
+	{
+		entt::entity daBomb = scene->CreateEntity();
+		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(daBomb);
+		renderable.Mesh = MeshBuilder::Bake(data_Bomb);
+		renderable.Material = mat;
+		Transform& t = scene->Registry().get<Transform>(daBomb);
+
+		//Initial Position Set 
+		t.SetPosition(glm::vec3(0, -0.5, -30));
+
+		// Make our monkeys spin around the center 
+		scene->AddBehaviour<bomb>(daBomb, glm::vec3(1.0f));
 	}
 	
 	// Creates our main camera
@@ -209,4 +257,15 @@ void SceneBuilder::Initialize()
 		renderable.Material = mat;
 	}
 
+}
+
+void SceneBuilder::RenderGUI() {
+	ImGui::Begin("Score");
+
+	// For now, we'll just have a slider to adjust our exposure
+	char txt[16];
+	sprintf(txt, "%d", controlCount);
+	ImGui::Button(txt);
+
+	ImGui::End();
 }

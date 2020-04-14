@@ -7,6 +7,7 @@
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <GLM/gtx/wrap.hpp>
+#include <imgui.h>
 
 template <typename T>
 T wrap(const T& value, const T& min, const T& max) {
@@ -351,7 +352,7 @@ void bomb::Update(entt::entity entity) {
 	Window::Sptr window = Application::Get()->GetWindow();
 
 	glm::vec3 translate = glm::vec3(0.0f);
-	translate.z += 5.0f;
+	translate.z += 2.5f;
 
 	translate *= Timing::DeltaTime * mySpeed;
 

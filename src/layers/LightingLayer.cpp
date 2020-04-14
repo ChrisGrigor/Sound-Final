@@ -203,24 +203,6 @@ void LightingLayer::PostRender() {
 	mainBuffer->UnBind();   
 }
 
-void LightingLayer::RenderGUI()
-{
-	// We'll put all the lighting stuff into it's own ImGUI window
-	ImGui::Begin("Score");
-
-	// For now, we'll just have a slider to adjust our exposure
-	char txt[16];
-	sprintf(txt, "%d", controlCount);
-	ImGui::Button(txt);
-	/*if (ImGui::DragFloat("Exposure", &exposure, 0.1f, 0.1f, 10.0f)) {
-		myFinalComposite->SetUniform("a_Exposure", exposure);
-	}*/
-	// We'll have a color picker for the ambient light color
-	//ImGui::ColorEdit3("Ambient", &myAmbientLight.x);
-	
-	ImGui::End();
-}
-
 void LightingLayer::PostProcessShadows() {
 	// We grab the application singleton to get the size of the screen
 	florp::app::Application* app = florp::app::Application::Get();

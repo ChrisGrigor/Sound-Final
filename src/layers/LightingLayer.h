@@ -15,9 +15,6 @@ public:
 	// Post Render will handle processing the camera's output
 	virtual void PostRender() override;
 
-	// Allows us to render some UI to edit our lighting parameters
-	virtual void RenderGUI() override;
-
 protected:
 	florp::graphics::Mesh::Sptr myFullscreenQuad;        // Used for our post processing passes
 	florp::graphics::Shader::Sptr myShader;              // Used to handle depth generation for regular shadow casters
