@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{1711c8a7-32f2-4e6a-9576-7eed912674ae}">
+		<property name="assetPath">
+			<value>EricMonkeyNoise.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5412244897959184</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{513f8c1c-f4d7-4ef0-8e4b-7007c8a106c5}</destination>
+		</relationship>
+	</object>
+</objects>

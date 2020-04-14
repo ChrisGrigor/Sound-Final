@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{ce7ec88e-b9e3-4d3a-833c-58c1f7eb0dc5}">
+		<property name="assetPath">
+			<value>monkey noise.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.9257142857142857</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{513f8c1c-f4d7-4ef0-8e4b-7007c8a106c5}</destination>
+		</relationship>
+	</object>
+</objects>
