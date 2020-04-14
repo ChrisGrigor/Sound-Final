@@ -81,6 +81,7 @@ void SceneBuilder::Initialize()
 	MeshData data = ObjLoader::LoadObj("Objects/monkey.obj", glm::vec4(1.0f));//Remake this to have proper orientation
 	MeshData data_Gorilla = ObjLoader::LoadObj("Objects/Gorilla-LP1.obj", glm::vec4(1.0f));
 	MeshData data_Lemonk = ObjLoader::LoadObj("lemonk.obj", glm::vec4(1.0f));
+	MeshData data_MarMon = ObjLoader::LoadObj("Objects/MarlinkMonkey.obj", glm::vec4(1.0f));
 
 	Shader::Sptr shader = std::make_shared<Shader>();
 	shader->LoadPart(ShaderStageType::VertexShader, "shaders/lighting.vs.glsl");
@@ -135,6 +136,24 @@ void SceneBuilder::Initialize()
 		// Make our monkeys spin around the center
 		scene->AddBehaviour<ControlSlow>(Lemonk, glm::vec3(1.0f));
 	}
+
+
+	//MarlinkMonkey (Eric)
+	{
+		entt::entity MarMonkey = scene->CreateEntity();
+		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(MarMonkey);
+		renderable.Mesh = MeshBuilder::Bake(data_MarMon);
+		renderable.Material = mat;
+		Transform& t = scene->Registry().get<Transform>(MarMonkey);
+
+		//Initial Position Set
+		t.SetPosition(glm::vec3(-2, 0.5, -25));
+
+		// Make our monkeys spin around the center
+		scene->AddBehaviour<ControlSlow>(MarMonkey, glm::vec3(1.0f));
+	}
+
+
 	
 	// Creates our main camera
 	{
