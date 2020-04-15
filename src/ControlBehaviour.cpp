@@ -280,7 +280,7 @@ void ControlMedium::Update(entt::entity entity) {
 		MonkeyDist = false;
 	}
 }
-//Xavier
+//Xavier and Eric's monkey speed
 void ControlSlow::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);

@@ -10,7 +10,6 @@ void AudioLayer::Initialize()
 	audioEngine.LoadBank("Master");
 
 	audioEngine.LoadEvent("Music");
-	audioEngine.SetEventPosition("Music", { 0,0,5 });
 	audioEngine.PlayEvent("Music");
 
 }

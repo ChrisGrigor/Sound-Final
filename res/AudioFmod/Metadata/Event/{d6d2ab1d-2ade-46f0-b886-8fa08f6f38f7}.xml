@@ -60,7 +60,7 @@
 	<object class="MarkerTrack" id="{eefb6e54-f423-403e-a0f0-347de9d92d05}" />
 	<object class="GroupTrack" id="{503fdaad-f678-4d27-baf8-13fbafc9ff28}">
 		<relationship name="modules">
-			<destination>{8af2bed7-c855-4533-81cd-02f8f5b08f76}</destination>
+			<destination>{e8aa0ea5-f276-4fbe-9acb-cec2d4f85474}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{09e374dc-9134-45f2-a443-944eed85e0ff}</destination>
@@ -68,7 +68,7 @@
 	</object>
 	<object class="Timeline" id="{ab82aa6e-0f22-4c49-9f43-4b25654f7b2d}">
 		<relationship name="modules">
-			<destination>{8af2bed7-c855-4533-81cd-02f8f5b08f76}</destination>
+			<destination>{e8aa0ea5-f276-4fbe-9acb-cec2d4f85474}</destination>
 		</relationship>
 		<relationship name="markers">
 			<destination>{03c12b2b-2823-4554-9f46-2a6860dc752b}</destination>
@@ -91,12 +91,9 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{bc4299d9-9243-4328-8ba6-320fbfa58d17}" />
-	<object class="SingleSound" id="{8af2bed7-c855-4533-81cd-02f8f5b08f76}">
+	<object class="SingleSound" id="{e8aa0ea5-f276-4fbe-9acb-cec2d4f85474}">
 		<property name="length">
-			<value>1.5412244897959184</value>
-		</property>
-		<property name="volume">
-			<value>-7</value>
+			<value>0.52244897959183678</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{1711c8a7-32f2-4e6a-9576-7eed912674ae}</destination>
@@ -124,7 +121,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>1.4300000000000002</value>
+			<value>0.52244897959183678</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{ab82aa6e-0f22-4c49-9f43-4b25654f7b2d}</destination>
@@ -149,9 +146,6 @@
 	<object class="MixerBusPanner" id="{e20fdee0-5388-4d5a-8568-1b28d241a227}" />
 	<object class="MixerBusFader" id="{5ad5610b-4a49-4471-90dc-88942de86d6c}" />
 	<object class="SpatialiserEffect" id="{eedcaaa5-8388-4f4d-a20b-61eb8dda0f4d}">
-		<property name="distanceRolloffType">
-			<value>2</value>
-		</property>
 		<property name="minimumDistance">
 			<value>30</value>
 		</property>

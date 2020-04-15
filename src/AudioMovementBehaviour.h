@@ -16,6 +16,7 @@ public:
 		// TODO:: ooo ooo ahh ahh
 
 		audioEngine.LoadEvent("Monkey");
+		audioEngine.SetEventPosition("Monkey", { 100,100,100 });
 		audioEngine.PlayEvent("Monkey");
 
 		newPosition = transform.GetLocalPosition();
@@ -43,6 +44,7 @@ public:
 		// TODO:: ooo ooo ahh ahh
 
 		audioEngine.LoadEvent("Monkey(X)");
+		audioEngine.SetEventPosition("Monkey(X)", { 100,100,100 });
 		audioEngine.PlayEvent("Monkey(X)");
 
 		newPosition = transform.GetLocalPosition();
@@ -69,6 +71,7 @@ public:
 		// TODO:: ooo ooo ahh ahh
 
 		audioEngine.LoadEvent("Monkey(H)");
+		audioEngine.SetEventPosition("Monkey(H)", { 100,100,100 });
 		audioEngine.PlayEvent("Monkey(H)");
 
 		newPosition = transform.GetLocalPosition();
@@ -95,6 +98,7 @@ public:
 		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
 		// TODO:: ooo ooo ahh ahh
 		audioEngine.LoadEvent("Gorilla(C)");
+		audioEngine.SetEventPosition("Gorilla(C)", { 100,100,100 });
 		audioEngine.PlayEvent("Gorilla(C)");
 
 		newPosition = transform.GetLocalPosition();
@@ -122,6 +126,7 @@ public:
 		// TODO:: ooo ooo ahh ahh
 
 		audioEngine.LoadEvent("Monkey(E)");
+		audioEngine.SetEventPosition("Monkey(E)", { 100,100,100 });
 		audioEngine.PlayEvent("Monkey(E)");
 
 		newPosition = transform.GetLocalPosition();
@@ -148,6 +153,7 @@ public:
 		// TODO:: ooo ooo ahh ahh
 
 		audioEngine.LoadEvent("Monkey(I)");
+		audioEngine.SetEventPosition("Monkey(I)", { 100,100,100 });
 		audioEngine.PlayEvent("Monkey(I)");
 
 		newPosition = transform.GetLocalPosition();
@@ -174,6 +180,7 @@ public:
 		// TODO:: ooo ooo ahh ahh
 
 		audioEngine.LoadEvent("Bomb");
+		audioEngine.SetEventPosition("Bomb", { 100,100,100 });
 		audioEngine.PlayEvent("Bomb");
 
 		newPosition = transform.GetLocalPosition();
