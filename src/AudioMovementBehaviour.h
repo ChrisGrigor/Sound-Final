@@ -9,18 +9,14 @@
 #include "AudioEngine.h"
 
 
-class AudioMovementBehaviour : public florp::game::IBehaviour {
+class DefaultMonkeyAudio : public florp::game::IBehaviour {
 public:
-	AudioMovementBehaviour() : IBehaviour(), newPosition(glm::vec3(0)), angle(4.7), radius(10),
-		angleIncrement(1.5), radiusIncrement(5), isAngleMoving(false), isRadiusMoving(false) {};
-	virtual ~AudioMovementBehaviour() = default;
-
 	virtual void OnLoad(entt::entity entity) override {
 		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
 		// TODO:: ooo ooo ahh ahh
-		AudioEngine& audioEngine = AudioEngine::GetInstance();
 
 		audioEngine.LoadEvent("Monkey");
+		audioEngine.SetEventPosition("Monkey", { 100,100,100 });
 		audioEngine.PlayEvent("Monkey");
 
 		newPosition = transform.GetLocalPosition();
@@ -28,53 +24,179 @@ public:
 
 	virtual void Update(entt::entity entity) override {
 		using namespace florp::app;
-		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
 		Window::Sptr window = Application::Get()->GetWindow();
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		newPosition = transform.GetLocalPosition();
 
-		
-		// Input 
-		if (window->IsKeyDown(Key::P)) {
-			isAngleMoving = !isAngleMoving;
-		}
+		audioEngine.SetEventPosition("Monkey", newPosition);
+	}
 
-		if (window->IsKeyDown(Key::O)) {
-			isRadiusMoving = !isRadiusMoving;
-		}
-		
-		if (window->IsKeyDown(Key::R)) {
-			angle = 4.7;
-			radius = 10;
-		}
+private:
+	glm::vec3 newPosition;
+	AudioEngine& audioEngine = AudioEngine::GetInstance();
+};
 
-		newPosition.x = cos(angle) * radius;
-		newPosition.z = sin(angle) * radius;
 
-		transform.SetPosition(newPosition);
-		AudioEngine::GetInstance().SetEventPosition("Monkey", newPosition);
+class AudioXavier : public florp::game::IBehaviour {
+public:
+	virtual void OnLoad(entt::entity entity) override {
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		// TODO:: ooo ooo ahh ahh
 
-		// TODO: Move the monkey head in a circle
-		if (isAngleMoving) {
-			angle += angleIncrement * florp::app::Timing::DeltaTime;
-		}
+		audioEngine.LoadEvent("Monkey(X)");
+		audioEngine.SetEventPosition("Monkey(X)", { 100,100,100 });
+		audioEngine.PlayEvent("Monkey(X)");
 
-		// TODO: Move the monkey head forward and back
-		if (isRadiusMoving) {
-			radius += radiusIncrement * florp::app::Timing::DeltaTime;
+		newPosition = transform.GetLocalPosition();
+	}
 
-			if (radius < 10 || radius > 30) {
-				radiusIncrement = -radiusIncrement;
-			}
-		}
+	virtual void Update(entt::entity entity) override {
+		using namespace florp::app;
+		Window::Sptr window = Application::Get()->GetWindow();
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		newPosition = transform.GetLocalPosition();
+
+		audioEngine.SetEventPosition("Monkey(X)", newPosition);
+	}
+
+private:
+	glm::vec3 newPosition;
+	AudioEngine &audioEngine = AudioEngine::GetInstance();
+};
+
+class AudioHao : public florp::game::IBehaviour {
+public:
+	virtual void OnLoad(entt::entity entity) override {
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		// TODO:: ooo ooo ahh ahh
+
+		audioEngine.LoadEvent("Monkey(H)");
+		audioEngine.SetEventPosition("Monkey(H)", { 100,100,100 });
+		audioEngine.PlayEvent("Monkey(H)");
+
+		newPosition = transform.GetLocalPosition();
+	}
+
+	virtual void Update(entt::entity entity) override {
+		using namespace florp::app;
+		Window::Sptr window = Application::Get()->GetWindow();
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		newPosition = transform.GetLocalPosition();
+
+		audioEngine.SetEventPosition("Monkey(H)", newPosition);
+	}
+
+private:
+	glm::vec3 newPosition;
+	AudioEngine& audioEngine = AudioEngine::GetInstance();
+};
+
+
+class AudioChris : public florp::game::IBehaviour {
+public:
+	virtual void OnLoad(entt::entity entity) override {
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		// TODO:: ooo ooo ahh ahh
+		audioEngine.LoadEvent("Gorilla(C)");
+		audioEngine.SetEventPosition("Gorilla(C)", { 100,100,100 });
+		audioEngine.PlayEvent("Gorilla(C)");
+
+		newPosition = transform.GetLocalPosition();
+	}
+
+	virtual void Update(entt::entity entity) override {
+		using namespace florp::app;
+		Window::Sptr window = Application::Get()->GetWindow();
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		newPosition = transform.GetLocalPosition();
+
+		audioEngine.SetEventPosition("Gorilla(C)", newPosition);
+	}
+
+private:
+	glm::vec3 newPosition;
+	AudioEngine& audioEngine = AudioEngine::GetInstance();
+};
+
+
+class AudioEric : public florp::game::IBehaviour {
+public:
+	virtual void OnLoad(entt::entity entity) override {
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		// TODO:: ooo ooo ahh ahh
+
+		audioEngine.LoadEvent("Monkey(E)");
+		audioEngine.SetEventPosition("Monkey(E)", { 100,100,100 });
+		audioEngine.PlayEvent("Monkey(E)");
+
+		newPosition = transform.GetLocalPosition();
+	}
+
+	virtual void Update(entt::entity entity) override {
+		using namespace florp::app;
+		Window::Sptr window = Application::Get()->GetWindow();
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		newPosition = transform.GetLocalPosition();
+
+		audioEngine.SetEventPosition("Monkey(E)", newPosition);
+	}
+
+private:
+	glm::vec3 newPosition;
+	AudioEngine& audioEngine = AudioEngine::GetInstance();
+};
+
+class AudioIsaiah : public florp::game::IBehaviour {
+public:
+	virtual void OnLoad(entt::entity entity) override {
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		// TODO:: ooo ooo ahh ahh
+
+		audioEngine.LoadEvent("Monkey(I)");
+		audioEngine.SetEventPosition("Monkey(I)", { 100,100,100 });
+		audioEngine.PlayEvent("Monkey(I)");
+
+		newPosition = transform.GetLocalPosition();
+	}
+
+	virtual void Update(entt::entity entity) override {
+		using namespace florp::app;
+		Window::Sptr window = Application::Get()->GetWindow();
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		newPosition = transform.GetLocalPosition();
+
+		audioEngine.SetEventPosition("Monkey(I)", newPosition);
+	}
+
+private:
+	glm::vec3 newPosition;
+	AudioEngine& audioEngine = AudioEngine::GetInstance();
+};
+
+class AudioBomb : public florp::game::IBehaviour {
+public:
+	virtual void OnLoad(entt::entity entity) override {
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		// TODO:: ooo ooo ahh ahh
+
+		audioEngine.LoadEvent("Bomb");
+		audioEngine.SetEventPosition("Bomb", { 100,100,100 });
+		audioEngine.PlayEvent("Bomb");
+
+		newPosition = transform.GetLocalPosition();
+	}
+
+	virtual void Update(entt::entity entity) override {
+		using namespace florp::app;
+		Window::Sptr window = Application::Get()->GetWindow();
+		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
+		newPosition = transform.GetLocalPosition();
+
+		audioEngine.SetEventPosition("Bomb", newPosition);
 
 	}
 
 private:
 	glm::vec3 newPosition;
-	float angle;
-	float radius;
-	bool isAngleMoving;
-	bool isRadiusMoving;
-
-	float angleIncrement;
-	float radiusIncrement;
+	AudioEngine& audioEngine = AudioEngine::GetInstance();
 };

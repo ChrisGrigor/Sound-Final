@@ -81,9 +81,9 @@ void SceneBuilder::Initialize()
 	//Bunch of primates
 	MeshData data = ObjLoader::LoadObj("Objects/monkey.obj", glm::vec4(1.0f));//Remake this to have proper orientation
 	MeshData data_Gorilla = ObjLoader::LoadObj("Objects/Gorilla-LP1.obj", glm::vec4(1.0f));
-	MeshData data_Lemonk = ObjLoader::LoadObj("lemonk.obj", glm::vec4(1.0f));
+	MeshData data_Lemonk = ObjLoader::LoadObj("Objects/lemonk.obj", glm::vec4(1.0f));
 	MeshData data_LeGorilleHead=ObjLoader::LoadObj("Objects/LeGorilleHead2.obj", glm::vec4(1.0f));
-	MeshData data_MarMon = ObjLoader::LoadObj("Objects/MarlinkMonkey1.obj", glm::vec4(1.0f));
+	MeshData data_MarMonkey = ObjLoader::LoadObj("Objects/MarlinkMonkey1.obj", glm::vec4(1.0f));
 	MeshData data_Monkey = ObjLoader::LoadObj("Objects/monkey_ACNH.obj", glm::vec4(1.0f));
 	//Bomb
 	MeshData data_Bomb = ObjLoader::LoadObj("Objects/bomb.obj", glm::vec4(1.0f));
@@ -110,8 +110,9 @@ void SceneBuilder::Initialize()
 		t.SetPosition(glm::vec3(0, -0.5, -30));
 		
 		// Make our monkeys spin around the center
-		//scene->AddBehaviour<AudioMovementBehaviour>(eMonkey);
+		scene->AddBehaviour<DefaultMonkeyAudio>(eMonkey);
 		scene->AddBehaviour<ControlBehaviour>(eMonkey, glm::vec3(1.0f));
+
 	}
 
 	//The Gorilla (Chris)
@@ -126,6 +127,7 @@ void SceneBuilder::Initialize()
 		t.SetPosition(glm::vec3(2, -0.5, -30));
 
 		// Make our monkeys spin around the center
+		scene->AddBehaviour<AudioChris>(Gorilla);
 		scene->AddBehaviour<ControlFastest>(Gorilla, glm::vec3(1.0f));
 	}
 
@@ -141,6 +143,7 @@ void SceneBuilder::Initialize()
 		t.SetPosition(glm::vec3(-2, -0.5, -20));
 
 		// Make our monkeys spin around the center
+		scene->AddBehaviour<AudioXavier>(Lemonk);
 		scene->AddBehaviour<ControlSlow>(Lemonk, glm::vec3(1.0f));
 	}
 
@@ -156,6 +159,7 @@ void SceneBuilder::Initialize()
 		t.SetPosition(glm::vec3(2, -0.5, -25));
 
 		// Make our monkeys spin around the center
+		scene->AddBehaviour<AudioIsaiah>(LeGorilleHead);
 		scene->AddBehaviour<ControlMedium>(LeGorilleHead, glm::vec3(1.0f));
 	}
 
@@ -163,14 +167,15 @@ void SceneBuilder::Initialize()
 	{
 		entt::entity MarMonkey = scene->CreateEntity();
 		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(MarMonkey);
-		renderable.Mesh = MeshBuilder::Bake(data_MarMon);
+		renderable.Mesh = MeshBuilder::Bake(data_MarMonkey);
 		renderable.Material = mat;
 		Transform& t = scene->Registry().get<Transform>(MarMonkey);
 
 		//Initial Position Set 
-		t.SetPosition(glm::vec3(-2, -0.5, -25));
+		t.SetPosition(glm::vec3(2, -0.5, -25));
 
 		// Make our monkeys spin around the center 
+		scene->AddBehaviour<AudioEric>(MarMonkey);
 		scene->AddBehaviour<ControlSlow>(MarMonkey, glm::vec3(1.0f));
 	}
 
@@ -182,10 +187,11 @@ void SceneBuilder::Initialize()
 		renderable.Material = mat;
 		Transform& t = scene->Registry().get<Transform>(Monkey);
 
-		//Initial Position Set 
+		//Initial Position Set  
 		t.SetPosition(glm::vec3(-2, -0.5, -25));
-
+		 
 		// Make our monkeys spin around the center 
+		scene->AddBehaviour<AudioHao>(Monkey);
 		scene->AddBehaviour<ControlFast>(Monkey, glm::vec3(1.0f));
 	}
 
@@ -200,7 +206,8 @@ void SceneBuilder::Initialize()
 		//Initial Position Set 
 		t.SetPosition(glm::vec3(0, -0.5, -30));
 
-		// Make our monkeys spin around the center 
+		// Make our monkeys spin around the center
+		scene->AddBehaviour<AudioBomb>(daBomb);
 		scene->AddBehaviour<bomb>(daBomb, glm::vec3(1.0f));
 	}
 	
@@ -258,7 +265,7 @@ void SceneBuilder::Initialize()
 		scene->AddBehaviour<ListenerBehaviour>(camera);
 	}	
 	// Our floor plane
-	{
+	{ 
 		// Building the mesh
 		MeshData data = MeshBuilder::Begin();
 		MeshBuilder::AddAlignedCube(data, glm::vec3(0.0f, -1.0f, 0.0), glm::vec3(100.0f, 0.1f, 100.0f));

@@ -2,5 +2,13 @@
 {eab4cb67-f40a-0338-03b4-2322d693026a} bank:/Master.strings
 {3f046c7a-9b61-46ed-830d-b7455ef9c46a} bus:/
 {52d99a05-159f-4178-893d-289e8a9777e0} bus:/Reverb
-{d3501c5f-bdee-4ccf-8e2b-f3dc860bf23c} event:/Monkey
+{a5b6e6b2-8d7d-4aa8-b103-77bba614566d} event:/Bomb
+{f0165e6f-4e26-44cf-9a7c-997d9f7419cb} event:/Death
+{6276b389-66ba-4b0c-aa7a-59a21f89e74d} event:/Explosion
+{52e3e596-e1a1-447a-af01-3f6b20d755c3} event:/Gorilla(C)
+{8ecbcf8d-73d8-427a-acf0-336936c21618} event:/Monkey
+{d6d2ab1d-2ade-46f0-b886-8fa08f6f38f7} event:/Monkey(E)
+{a50df465-e7fa-4ccc-ab43-88bf90fbe965} event:/Monkey(H)
+{092e5ff7-58e1-49f3-88b2-ac2de2f18478} event:/Monkey(I)
+{dee190b0-e8b1-4f4a-878f-903c934729f4} event:/Monkey(X)
 {fc8c6c74-55d9-4440-b323-17710f259189} event:/Music
