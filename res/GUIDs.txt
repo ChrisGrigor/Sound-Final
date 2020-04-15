@@ -6,6 +6,7 @@
 {f0165e6f-4e26-44cf-9a7c-997d9f7419cb} event:/Death
 {6276b389-66ba-4b0c-aa7a-59a21f89e74d} event:/Explosion
 {52e3e596-e1a1-447a-af01-3f6b20d755c3} event:/Gorilla(C)
+{8ecbcf8d-73d8-427a-acf0-336936c21618} event:/Monkey
 {d6d2ab1d-2ade-46f0-b886-8fa08f6f38f7} event:/Monkey(E)
 {a50df465-e7fa-4ccc-ab43-88bf90fbe965} event:/Monkey(H)
 {092e5ff7-58e1-49f3-88b2-ac2de2f18478} event:/Monkey(I)

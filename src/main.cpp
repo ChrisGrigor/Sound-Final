@@ -15,9 +15,9 @@ int main()
 		florp::app::Application* app = new florp::app::Application();
 
 		// Set up our layers
-		app->AddLayer<florp::game::BehaviourLayer>();
 		app->AddLayer<florp::game::ImGuiLayer>();
 		app->AddLayer<AudioLayer>();
+		app->AddLayer<florp::game::BehaviourLayer>();
 		app->AddLayer<SceneBuilder>();
 		app->AddLayer<RenderLayer>();
 		app->AddLayer<LightingLayer>();

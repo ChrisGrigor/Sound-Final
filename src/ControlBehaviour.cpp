@@ -81,7 +81,7 @@ void ControlBehaviour::Update(entt::entity entity) {
 		MonkeyDist = false;
 	}
 }
-
+//Chris
 void ControlFastest::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
@@ -147,7 +147,7 @@ void ControlFastest::Update(entt::entity entity) {
 		ChrisDist = false;
 	}
 }
-
+//Haocean
 void ControlFast::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
@@ -213,11 +213,12 @@ void ControlFast::Update(entt::entity entity) {
 		MonkeyDist = false;
 	}
 }
-
+//Isaiah
 void ControlMedium::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
 	Window::Sptr window = Application::Get()->GetWindow();
+	AudioEngine& audioEngine = AudioEngine::GetInstance();
 
 	glm::vec3 translate = glm::vec3(0.0f);
 	translate.z += 2.5f;
@@ -279,12 +280,11 @@ void ControlMedium::Update(entt::entity entity) {
 		MonkeyDist = false;
 	}
 }
-
+//Xavier
 void ControlSlow::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
 	Window::Sptr window = Application::Get()->GetWindow();
-
 	glm::vec3 translate = glm::vec3(0.0f);
 	translate.z += 2.0f;
 
@@ -345,7 +345,7 @@ void ControlSlow::Update(entt::entity entity) {
 		MonkeyDist = false;
 	}
 }
-
+//Bomb
 void bomb::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
