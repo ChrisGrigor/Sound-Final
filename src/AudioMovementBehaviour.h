@@ -36,7 +36,6 @@ private:
 	AudioEngine& audioEngine = AudioEngine::GetInstance();
 };
 
-
 class AudioXavier : public florp::game::IBehaviour {
 public:
 	virtual void OnLoad(entt::entity entity) override {
@@ -91,7 +90,6 @@ private:
 	AudioEngine& audioEngine = AudioEngine::GetInstance();
 };
 
-
 class AudioChris : public florp::game::IBehaviour {
 public:
 	virtual void OnLoad(entt::entity entity) override {
@@ -118,13 +116,11 @@ private:
 	AudioEngine& audioEngine = AudioEngine::GetInstance();
 };
 
-
 class AudioEric : public florp::game::IBehaviour {
 public:
 	virtual void OnLoad(entt::entity entity) override {
 		auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
 		// TODO:: ooo ooo ahh ahh
-
 		audioEngine.LoadEvent("Monkey(E)");
 		audioEngine.SetEventPosition("Monkey(E)", { 100,100,100 });
 		audioEngine.PlayEvent("Monkey(E)");

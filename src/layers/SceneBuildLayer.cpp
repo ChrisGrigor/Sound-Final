@@ -175,7 +175,8 @@ void SceneBuilder::Initialize()
 		t.SetPosition(glm::vec3(2, -0.5, -25));
 
 		// Make our monkeys spin around the center 
-		scene->AddBehaviour<AudioEric>(MarMonkey);
+		//Audio stays at 0,0,0 for some reason, even though all code is correct (FMOD is correct too)
+		scene->AddBehaviour<AudioEric>(MarMonkey); //Doesn't work properly
 		scene->AddBehaviour<ControlSlow>(MarMonkey, glm::vec3(1.0f));
 	}
 
@@ -264,6 +265,7 @@ void SceneBuilder::Initialize()
 
 		scene->AddBehaviour<ListenerBehaviour>(camera);
 	}	
+
 	// Our floor plane
 	{ 
 		// Building the mesh

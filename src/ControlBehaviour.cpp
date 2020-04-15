@@ -15,7 +15,7 @@ T wrap(const T& value, const T& min, const T& max) {
 	T range = max - min;
 	return glm::mod(glm::mod(value - min, range) + range, range )+ min;
 }
-
+//Base Monkey
 void ControlBehaviour::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
@@ -85,7 +85,7 @@ void ControlBehaviour::Update(entt::entity entity) {
 		MonkeyDist = false;
 	}
 }
-
+//Points
 void ControlBehaviour::RenderGUI(entt::entity entity){
 	ImGui::Begin("Score");
 
@@ -95,7 +95,7 @@ void ControlBehaviour::RenderGUI(entt::entity entity){
 
 	ImGui::End();
 }
-
+//Chris
 void ControlFastest::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
@@ -306,7 +306,7 @@ void ControlMedium::Update(entt::entity entity) {
 		MonkeyDist = false;
 	}
 }
-//Xavier and Eric's monkey speed
+//Xavier and Eric
 void ControlSlow::Update(entt::entity entity) {
 	using namespace florp::app;
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);

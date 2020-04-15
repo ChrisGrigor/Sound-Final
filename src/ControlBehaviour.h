@@ -25,7 +25,6 @@ private:
 	glm::vec3 mySpeed;
 	glm::vec2 myYawPitch;
 };
-
 //Gorilla 4.0
 class ControlFastest : public florp::game::IBehaviour {
 public:
@@ -42,7 +41,6 @@ private:
 	glm::vec3 mySpeed;
 	glm::vec2 myYawPitch;
 };
-
 // 3.0
 class ControlFast : public florp::game::IBehaviour {
 public:
@@ -59,7 +57,6 @@ private:
 	glm::vec3 mySpeed;
 	glm::vec2 myYawPitch;
 };
-
 // 2.5
 class ControlMedium : public florp::game::IBehaviour {
 public:
@@ -76,7 +73,6 @@ private:
 	glm::vec3 mySpeed;
 	glm::vec2 myYawPitch;
 };
-
 // 2.0
 class ControlSlow : public florp::game::IBehaviour {
 public:
