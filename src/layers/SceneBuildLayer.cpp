@@ -89,6 +89,8 @@ void SceneBuilder::Initialize()
 	MeshData data_Bomb = ObjLoader::LoadObj("Objects/bomb.obj", glm::vec4(1.0f));
 	//Floor Markers
 	MeshData data_Floor = ObjLoader::LoadObj("untitled.obj", glm::vec4(1.0f));
+	//Floor Marker for the Bomb 
+	MeshData data_FloorBomb = ObjLoader::LoadObj("Objects/FloorBombMarker2.obj", glm::vec4(1.0f));
 
 	Shader::Sptr shader = std::make_shared<Shader>();
 	shader->LoadPart(ShaderStageType::VertexShader, "shaders/lighting.vs.glsl");
@@ -176,7 +178,7 @@ void SceneBuilder::Initialize()
 
 		// Make our monkeys spin around the center 
 		//Audio stays at 0,0,0 for some reason, even though all code is correct (FMOD is correct too)
-		scene->AddBehaviour<AudioEric>(MarMonkey); //Doesn't work properly
+		//scene->AddBehaviour<AudioEric>(MarMonkey); //Doesn't work properly
 		scene->AddBehaviour<ControlSlow>(MarMonkey, glm::vec3(1.0f));
 	}
 
@@ -215,6 +217,7 @@ void SceneBuilder::Initialize()
 	//Floors 
 	{
 		int zPos = -5;
+		int yPos = -1.5;
 		for (int i = 0; i < 2; i++) {
 			entt::entity Floor = scene->CreateEntity();
 			RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(Floor);
@@ -222,9 +225,22 @@ void SceneBuilder::Initialize()
 			renderable.Material = mat;
 			Transform& t = scene->Registry().get<Transform>(Floor);
 			//Initial Position Set 
-			t.SetPosition(glm::vec3(0, -1.0, zPos));
+			t.SetPosition(glm::vec3(0, yPos, zPos));
 			zPos += 4;
+			yPos = -1.0;
 		}
+	}
+
+	//Floor marker for bomb 
+	{
+		entt::entity FBM = scene->CreateEntity();
+		RenderableComponent& renderable = scene->Registry().assign<RenderableComponent>(FBM);
+		renderable.Mesh = MeshBuilder::Bake(data_FloorBomb);
+		renderable.Material = mat;
+		Transform& t = scene->Registry().get<Transform>(FBM);
+
+		//Initial Position Set 
+		t.SetPosition(glm::vec3(2, -0.5, -2));
 	}
 
 	// Creates our main camera

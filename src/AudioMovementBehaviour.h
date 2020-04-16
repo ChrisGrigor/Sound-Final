@@ -7,6 +7,10 @@
 #include "florp/app/Window.h"
 #include "florp/app/Application.h"
 #include "AudioEngine.h"
+#include "ControlBehaviour.h"
+
+//Can use if check for death bool
+//Can use if check for explosion bool 
 
 
 class DefaultMonkeyAudio : public florp::game::IBehaviour {

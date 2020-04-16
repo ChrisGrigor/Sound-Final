@@ -22,7 +22,14 @@ void ControlBehaviour::Update(entt::entity entity) {
 	Window::Sptr window = Application::Get()->GetWindow();
 
 	glm::vec3 translate = glm::vec3(0.0f);
-	translate.z += 3.5f;
+
+	//Making the player lose
+	if (death == false && explosion == false) {
+		translate.z += 3.5f;
+	}
+	if (death == true || explosion == true) {
+		translate.z += 0;
+	}
 
 	translate *= Timing::DeltaTime * mySpeed;
 
@@ -102,7 +109,13 @@ void ControlFastest::Update(entt::entity entity) {
 	Window::Sptr window = Application::Get()->GetWindow();
 
 	glm::vec3 translate = glm::vec3(0.0f);
-	translate.z += 4.0f;
+	//Making the player lose
+	if (death == false && explosion == false) {
+		translate.z += 4.0f;
+	}
+	if (death == true || explosion == true) {
+		translate.z += 0;
+	}
 
 	translate *= Timing::DeltaTime * mySpeed;
 
@@ -172,7 +185,13 @@ void ControlFast::Update(entt::entity entity) {
 	Window::Sptr window = Application::Get()->GetWindow();
 
 	glm::vec3 translate = glm::vec3(0.0f);
-	translate.z += 3.0f;
+	//Making the player lose
+	if (death == false && explosion == false) {
+		translate.z += 3.0f;
+	}
+	if (death == true || explosion == true) {
+		translate.z += 0;
+	}
 
 	translate *= Timing::DeltaTime * mySpeed;
 
@@ -243,7 +262,13 @@ void ControlMedium::Update(entt::entity entity) {
 	AudioEngine& audioEngine = AudioEngine::GetInstance();
 
 	glm::vec3 translate = glm::vec3(0.0f);
-	translate.z += 2.5f;
+	//Making the player lose
+	if (death == false && explosion == false) {
+		translate.z += 2.5f;
+	}
+	if (death == true || explosion == true) {
+		translate.z += 0;
+	}
 
 	translate *= Timing::DeltaTime * mySpeed;
 
@@ -312,7 +337,13 @@ void ControlSlow::Update(entt::entity entity) {
 	auto& transform = CurrentRegistry().get<florp::game::Transform>(entity);
 	Window::Sptr window = Application::Get()->GetWindow();
 	glm::vec3 translate = glm::vec3(0.0f);
-	translate.z += 2.0f;
+	//Making the player lose
+	if (death == false && explosion == false) {
+		translate.z += 2.0f;
+	}
+	if (death == true || explosion == true) {
+		translate.z += 0;
+	}
 
 	translate *= Timing::DeltaTime * mySpeed;
 
@@ -382,7 +413,13 @@ void bomb::Update(entt::entity entity) {
 	Window::Sptr window = Application::Get()->GetWindow();
 
 	glm::vec3 translate = glm::vec3(0.0f);
-	translate.z += 2.5f;
+	//Making the player lose
+	if (explosion == false && explosion == false) {
+		translate.z += 2.5f;
+	}
+	if (death == true || explosion == true) {
+		translate.z += 0;
+	}
 
 	translate *= Timing::DeltaTime * mySpeed;
 
@@ -401,32 +438,38 @@ void bomb::Update(entt::entity entity) {
 	if (window->IsKeyDown(Key::One) && MonkeyPosX == -2) {
 		//Testing the distance
 		if (MonkeyPosZ >= -5) {
-			death = true;
+			explosion = true;
 		}
 	}
 	if (window->IsKeyDown(Key::Two) && MonkeyPosX == 0) {
 		//Testing the distance
 		if (MonkeyPosZ >= -5) {
-			death = true;
+			explosion = true;
 		}
 	}
 	if (window->IsKeyDown(Key::Three) && MonkeyPosX == 2) {
 		//Testing the distance
 		if (MonkeyPosZ >= -5) {
-			death = true;
+			explosion = true;
 		}
 	}
-	//Bomb stuff
+
+	//Bomb Mechanics
+	if (window->IsKeyDown(Key::Four) && MonkeyPosX == -2) {
+		if (MonkeyPosZ >= -5 && MonkeyPosZ <= -2) {
+			MonkeyDist = true;
+		}
+	}
+	if (window->IsKeyDown(Key::Five) && MonkeyPosX == 0) {
+		if (MonkeyPosZ >= -5 && MonkeyPosZ <= -2) {
+			MonkeyDist = true;
+		}
+	}
 	if (window->IsKeyDown(Key::Six) && MonkeyPosX == 2) {
-		//Testing the distance
-		if (MonkeyPosZ >= -5) {
-			translate.z += -5.0f;
-		}
-		if (MonkeyPosZ <= -15 && MonkeyPosX == 2) {
-			translate.z += 5.0f;
+		if (MonkeyPosZ >= -5 && MonkeyPosZ <= -2) {
+			MonkeyDist = true;
 		}
 	}
-	//End of Bomb stuff, might not use
 
 	//Bomb Making it close, so it teleports back
 	if (MonkeyPosZ >= -1) {

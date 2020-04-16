@@ -7,6 +7,7 @@
 
 static int controlCount;
 static bool death = false;
+static bool explosion = false;
 //Base Monkey Head
 class ControlBehaviour : public florp::game::IBehaviour {
 public:
