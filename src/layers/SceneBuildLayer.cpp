@@ -111,7 +111,7 @@ void SceneBuilder::Initialize()
 		Transform& t = scene->Registry().get<Transform>(eMonkey);
 		t.SetPosition(glm::vec3(0, -0.5, -30));
 		
-		// Make our monkeys spin around the center
+		// Make our move toward player and sound
 		scene->AddBehaviour<DefaultMonkeyAudio>(eMonkey);
 		scene->AddBehaviour<ControlBehaviour>(eMonkey, glm::vec3(1.0f));
 
@@ -128,7 +128,7 @@ void SceneBuilder::Initialize()
 		//Initial Position Set
 		t.SetPosition(glm::vec3(2, -0.5, -30));
 
-		// Make our monkeys spin around the center
+		// Make our move toward player and sound
 		scene->AddBehaviour<AudioChris>(Gorilla);
 		scene->AddBehaviour<ControlFastest>(Gorilla, glm::vec3(1.0f));
 	}
@@ -144,7 +144,6 @@ void SceneBuilder::Initialize()
 		//Initial Position Set
 		t.SetPosition(glm::vec3(-2, -0.5, -20));
 
-		// Make our monkeys spin around the center
 		scene->AddBehaviour<AudioXavier>(Lemonk);
 		scene->AddBehaviour<ControlSlow>(Lemonk, glm::vec3(1.0f));
 	}
@@ -160,7 +159,6 @@ void SceneBuilder::Initialize()
 		//Initial Position Set
 		t.SetPosition(glm::vec3(2, -0.5, -25));
 
-		// Make our monkeys spin around the center
 		scene->AddBehaviour<AudioIsaiah>(LeGorilleHead);
 		scene->AddBehaviour<ControlMedium>(LeGorilleHead, glm::vec3(1.0f));
 	}
@@ -176,7 +174,7 @@ void SceneBuilder::Initialize()
 		//Initial Position Set 
 		t.SetPosition(glm::vec3(2, -0.5, -25));
 
-		// Make our monkeys spin around the center 
+		// Make our move toward player and sound
 		//Audio stays at 0,0,0 for some reason, even though all code is correct (FMOD is correct too)
 		//scene->AddBehaviour<AudioEric>(MarMonkey); //Doesn't work properly
 		scene->AddBehaviour<ControlSlow>(MarMonkey, glm::vec3(1.0f));
@@ -193,7 +191,7 @@ void SceneBuilder::Initialize()
 		//Initial Position Set  
 		t.SetPosition(glm::vec3(-2, -0.5, -25));
 		 
-		// Make our monkeys spin around the center 
+		// Make our move toward player and sound
 		scene->AddBehaviour<AudioHao>(Monkey);
 		scene->AddBehaviour<ControlFast>(Monkey, glm::vec3(1.0f));
 	}
@@ -209,7 +207,7 @@ void SceneBuilder::Initialize()
 		//Initial Position Set 
 		t.SetPosition(glm::vec3(0, -0.5, -30));
 
-		// Make our monkeys spin around the center
+		// Make our move toward player and sound
 		scene->AddBehaviour<AudioBomb>(daBomb);
 		scene->AddBehaviour<bomb>(daBomb, glm::vec3(1.0f));
 	}

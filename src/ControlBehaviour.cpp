@@ -100,6 +100,12 @@ void ControlBehaviour::RenderGUI(entt::entity entity){
 	sprintf(txt, "%d", controlCount);
 	ImGui::Button(txt);
 
+	if (death || explosion == true)
+	{
+		//This also breaks the game, sort of what we wanted to happen when player loses anyways
+		ImGui::BeginMenu("You died! Better luck next time!");
+	}
+
 	ImGui::End();
 }
 //Chris
@@ -414,11 +420,12 @@ void bomb::Update(entt::entity entity) {
 
 	glm::vec3 translate = glm::vec3(0.0f);
 	//Making the player lose
-	if (explosion == false && explosion == false) {
+	if (death == false && explosion == false) {
 		translate.z += 2.5f;
 	}
 	if (death == true || explosion == true) {
 		translate.z += 0;
+
 	}
 
 	translate *= Timing::DeltaTime * mySpeed;
@@ -497,5 +504,34 @@ void bomb::Update(entt::entity entity) {
 
 		}
 		MonkeyDist = false;
+	}
+
+	if (explosion == true)
+	{
+		AudioEngine::GetInstance().SetEventPosition("Explosion", { 0,0,0 });
+
+		//Stop all other audio if it explodes
+		AudioEngine::GetInstance().StopEvent("Monkey");
+		AudioEngine::GetInstance().StopEvent("Monkey(X)");
+		AudioEngine::GetInstance().StopEvent("Monkey(I)");
+		AudioEngine::GetInstance().StopEvent("Monkey(H)");
+		//AudioEngine::GetInstance().StopEvent("Monkey(E)");
+		AudioEngine::GetInstance().StopEvent("Gorilla(C)");
+		AudioEngine::GetInstance().StopEvent("Bomb");
+		AudioEngine::GetInstance().StopEvent("Music");
+	}
+	if (death == true)
+	{
+		AudioEngine::GetInstance().SetEventPosition("Death", { 0,0,0 });
+
+		//If dead, stop all the sounds
+		AudioEngine::GetInstance().StopEvent("Monkey");
+		AudioEngine::GetInstance().StopEvent("Monkey(X)");
+		AudioEngine::GetInstance().StopEvent("Monkey(I)");
+		AudioEngine::GetInstance().StopEvent("Monkey(H)");
+		//AudioEngine::GetInstance().StopEvent("Monkey(E)");
+		AudioEngine::GetInstance().StopEvent("Gorilla(C)");
+		AudioEngine::GetInstance().StopEvent("Bomb");
+		AudioEngine::GetInstance().StopEvent("Music");
 	}
 }
