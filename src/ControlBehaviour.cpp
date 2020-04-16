@@ -414,7 +414,7 @@ void bomb::Update(entt::entity entity) {
 
 	glm::vec3 translate = glm::vec3(0.0f);
 	//Making the player lose
-	if (explosion == false && explosion == false) {
+	if (death == false && explosion == false) {
 		translate.z += 2.5f;
 	}
 	if (death == true || explosion == true) {
